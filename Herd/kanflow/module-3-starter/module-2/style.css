@@ -1,0 +1,221 @@
+/* =============================================
+   KANFLOW - MODULE 3 CSS
+   ============================================= */
+
+:root {
+  --bg:             #0f0f13;
+  --surface:        #18181f;
+  --surface-2:      #22222d;
+  --border:         #2e2e3a;
+  --text:           #e8e8f0;
+  --text-muted:     #7070a0;
+  --accent:         #c8f135;
+  --col-todo:       #5b8cff;
+  --col-inprogress: #ff9f43;
+  --col-review:     #a29bfe;
+  --col-testing:    #fd79a8;   /* Module 2 Exercise 02 */
+  --col-done:       #26de81;
+  --tag-blue:       rgba(91,140,255,0.15);
+  --tag-green:      rgba(38,222,129,0.15);
+  --tag-yellow:     rgba(255,159,67,0.15);
+  --tag-purple:     rgba(162,155,254,0.15);
+  --tag-pink:       rgba(253,121,168,0.15);  /* Module 2 Exercise 02 */
+  --font-display:   'Syne', sans-serif;
+  --font-mono:      'DM Mono', monospace;
+  --radius-md:      12px;
+  --radius-lg:      18px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-display);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* HEADER */
+.app-header {
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  background: rgba(15,15,19,0.85);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner { width: 100%; display: flex; align-items: center; }
+.logo         { display: flex; align-items: center; gap: 0.5rem; }
+.logo-icon    { font-size: 1.2rem; font-weight: 800; color: var(--accent); font-family: var(--font-mono); }
+.logo h1      { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; }
+
+/* BOARD */
+.board {
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  padding: 2rem;
+  flex: 1;
+  align-items: flex-start;
+  overflow-x: auto;
+}
+
+/* COLUMN */
+.column {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  min-width: 300px;
+  flex: 1;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.1rem 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Column dots — one class per column */
+.column-dot     { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.dot-todo       { background: var(--col-todo);       }
+.dot-inprogress { background: var(--col-inprogress); }
+.dot-review     { background: var(--col-review);     }
+.dot-testing    { background: var(--col-testing);    }
+.dot-done       { background: var(--col-done);       }
+
+.column-title {
+  font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-muted); flex: 1;
+}
+.column-count {
+  font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--text-muted); background: var(--surface-2);
+  border-radius: 999px; padding: 0.1rem 0.55rem;
+}
+
+/* CARD LIST */
+.card-list {
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-height: 80px;
+}
+
+/* CARD */
+.card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card:hover    { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
+.card-done     { opacity: 0.55; }
+.card-done .card-title { text-decoration: line-through; }
+.card-title    { font-size: 0.9rem; font-weight: 500; line-height: 1.45; }
+.card-footer   { display: flex; align-items: center; gap: 0.4rem; }
+
+/* TAGS */
+.card-tag {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  font-weight: 500; padding: 0.2rem 0.55rem;
+  border-radius: 6px; letter-spacing: 0.04em;
+}
+.tag-blue   { background: var(--tag-blue);   color: #5b8cff; }
+.tag-green  { background: var(--tag-green);  color: #26de81; }
+.tag-yellow { background: var(--tag-yellow); color: #ff9f43; }
+.tag-purple { background: var(--tag-purple); color: #a29bfe; }
+.tag-pink   { background: var(--tag-pink);   color: #fd79a8; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .board  { flex-direction: column; padding: 1rem; }
+  .column { min-width: unset; max-width: unset; width: 100%; }
+}
+
+/* =============================================
+   MODULE 3 — ADD CARD FORM
+   4.3 Input and button in the header
+   ============================================= */
+.add-card-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-left: auto;  /* pushes form to the right side of the header */
+}
+
+.card-input {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  width: 220px;
+  outline: none;
+}
+
+.card-input:focus {
+  border-color: var(--accent);  /* accent color highlights input on focus */
+}
+
+.add-card-btn {
+  background: var(--accent);    /* uses accent color from :root */
+  color: #0f0f13;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.add-card-btn:hover {
+  opacity: 0.85;                /* slightly fades button on hover */
+}
+
+/* =============================================
+   MODULE 3 — DELETE BUTTON
+   7.3 Sits inside card footer, aligned right
+   ============================================= */
+.delete-btn {
+  margin-left: auto;            /* pushes button to the right of the footer */
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.delete-btn:hover {
+  border-color: var(--col-todo); /* turns blue on hover */
+  color: var(--col-todo);
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KanFlow Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===========================
+       HEADER
+  ============================ -->
+  <header class="app-header">
+    <div class="header-inner">
+
+      <div class="logo">
+        <span class="logo-icon">K</span>
+        <h1>KanFlow</h1>
+      </div>
+
+      <!-- 4.1 Add Card Form — input field and button -->
+      <div class="add-card-form">
+        <input
+          type="text"
+          id="card-input"
+          class="card-input"
+          placeholder="Add a new card..."
+        />
+        <button id="add-card-btn" class="add-card-btn">Add Card</button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ===========================
+       BOARD
+       Built entirely by JavaScript
+       renderBoard() in board.js
+  ============================ -->
+  <main class="board" id="board">
+    <!-- Rendered by JavaScript -->
+  </main>
+
+  <!-- 4.2 Script tags — order matters -->
+  <script src="js/data.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/cards.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
