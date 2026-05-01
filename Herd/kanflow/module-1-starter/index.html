@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KanFlow Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Exercise 03: accent color + Exercise 01: dot-review added inline for convenience -->
+  <style>
+    :root {
+      --accent: #6c63ff;
+    }
+    .dot-review { background: #a29bfe; }
+  </style>
+</head>
+<body>
+
+  <!-- ===========================
+       HEADER
+  ============================ -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <h1>KanFlow</h1>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===========================
+       BOARD
+       Contains all columns
+  ============================ -->
+  <main class="board" id="board">
+
+    <!-- COLUMN: To Do -->
+    <section class="column" data-column="todo">
+      <div class="column-header">
+        <span class="column-dot dot-todo"></span>
+        <h2 class="column-title">To Do</h2>
+        <span class="column-count">6</span> <!-- updated: 3 original + 3 new -->
+      </div>
+      <div class="card-list" id="col-todo">
+
+        <!-- Original cards -->
+        <article class="card">
+          <p class="card-title">Research event-driven patterns</p>
+          <div class="card-footer">
+            <span class="card-tag tag-blue">Research</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <p class="card-title">Set up project folder structure</p>
+          <div class="card-footer">
+            <span class="card-tag tag-green">Setup</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <p class="card-title">Write HTML skeleton</p>
+          <div class="card-footer">
+            <span class="card-tag tag-yellow">HTML</span>
+          </div>
+        </article>
+
+        <!-- Exercise 02: 3 new cards -->
+        <article class="card">
+          <p class="card-title">Write unit tests for renderBoard</p>
+          <div class="card-footer">
+            <span class="card-tag tag-blue">Testing</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <p class="card-title">Set up Git repository and .gitignore</p>
+          <div class="card-footer">
+            <span class="card-tag tag-green">Setup</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <p class="card-title">Design card component mockup</p>
+          <div class="card-footer">
+            <span class="card-tag tag-yellow">Design</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- COLUMN: In Progress -->
+    <section class="column" data-column="inprogress">
+      <div class="column-header">
+        <span class="column-dot dot-inprogress"></span>
+        <h2 class="column-title">In Progress</h2>
+        <span class="column-count">2</span>
+      </div>
+      <div class="card-list" id="col-inprogress">
+
+        <article class="card">
+          <p class="card-title">Style the board layout with CSS</p>
+          <div class="card-footer">
+            <span class="card-tag tag-yellow">CSS</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <p class="card-title">Link JS files to index.html</p>
+          <div class="card-footer">
+            <span class="card-tag tag-blue">JS</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Exercise 01: Review column (between In Progress and Done) -->
+    <section class="column" data-column="review">
+      <div class="column-header">
+        <span class="column-dot dot-review"></span>
+        <h2 class="column-title">Review</h2>
+        <span class="column-count">0</span>
+      </div>
+      <div class="card-list" id="col-review">
+
+      </div>
+    </section>
+
+    <!-- COLUMN: Done -->
+    <section class="column" data-column="done">
+      <div class="column-header">
+        <span class="column-dot dot-done"></span>
+        <h2 class="column-title">Done</h2>
+        <span class="column-count">1</span>
+      </div>
+      <div class="card-list" id="col-done">
+
+        <article class="card card-done">
+          <p class="card-title">Plan Kanban board modules</p>
+          <div class="card-footer">
+            <span class="card-tag tag-green">Planning</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

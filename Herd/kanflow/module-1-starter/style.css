@@ -1,0 +1,184 @@
+/* =============================================
+   KANFLOW — MODULE 1 STARTER CSS
+   ============================================= */
+
+/* ─────────────────────────────────────────────
+   4.1 CSS CUSTOM PROPERTIES (VARIABLES)
+   Defined once in :root, used everywhere
+   with var(--name). Change one value here
+   and the entire board updates instantly.
+───────────────────────────────────────────── */
+:root {
+  --bg:             #0f0f13;          /* Main page background */
+  --surface:        #18181f;          /* Column background */
+  --surface-2:      #22222d;          /* Card background */
+  --border:         #2e2e3a;          /* Borders throughout */
+  --text:           #e8e8f0;          /* Main text color */
+  --text-muted:     #7070a0;          /* Dimmed text (titles, counts) */
+  --accent:         #6c63ff;          /* ← Exercise 03: change this color! */
+  --col-todo:       #5b8cff;          /* To Do dot color */
+  --col-inprogress: #ff9f43;          /* In Progress dot color */
+  --col-review:     #a29bfe;          /* Exercise 01: Review dot color */
+  --col-done:       #26de81;          /* Done dot color */
+  --tag-blue:       rgba(91,140,255,0.15);   /* Blue tag background */
+  --tag-green:      rgba(38,222,129,0.15);   /* Green tag background */
+  --tag-yellow:     rgba(255,159,67,0.15);   /* Yellow tag background */
+  --tag-purple:     rgba(162,155,254,0.15);  /* Exercise 01: Review tag background */
+  --font-display:   'Syne', sans-serif;
+  --font-mono:      'DM Mono', monospace;
+  --radius-md:      12px;
+  --radius-lg:      18px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg);        /* uses --bg variable */
+  color: var(--text);                 /* uses --text variable */
+  font-family: var(--font-display);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ─────────────────────────────────────────────
+   HEADER
+   sticky + backdrop-filter keeps it visible
+   while scrolling the board horizontally
+───────────────────────────────────────────── */
+.app-header {
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  background: rgba(15,15,19,0.85);
+  backdrop-filter: blur(12px);        /* frosted glass effect */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner { width: 100%; display: flex; align-items: center; }
+.logo         { display: flex; align-items: center; gap: 0.5rem; }
+.logo-icon    { font-size: 1.4rem; color: var(--accent); } /* accent variable used here */
+.logo h1      { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; }
+
+/* ─────────────────────────────────────────────
+   4.2 FLEXBOX — BOARD LAYOUT
+   display: flex places all columns side by side.
+   Without it, columns would stack vertically.
+───────────────────────────────────────────── */
+.board {
+  display: flex;            /* enables flexbox */
+  flex-direction: row;      /* children go left → right */
+  gap: 1.25rem;             /* space between columns */
+  padding: 2rem;
+  flex: 1;
+  align-items: flex-start;  /* columns pin to the top, don't stretch */
+  overflow-x: auto;         /* scroll horizontally if columns overflow */
+}
+
+/* ─────────────────────────────────────────────
+   COLUMN
+   flex: 1 makes each column share space equally
+───────────────────────────────────────────── */
+.column {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  min-width: 300px;
+  flex: 1;                  /* each column grows/shrinks equally */
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;   /* header stacks above card list */
+  overflow: hidden;
+}
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.1rem 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Column dot colors — each uses its own variable */
+.column-dot     { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.dot-todo       { background: var(--col-todo); }
+.dot-inprogress { background: var(--col-inprogress); }
+.dot-review     { background: var(--col-review); }   /* Exercise 01 */
+.dot-done       { background: var(--col-done); }
+
+.column-title {
+  font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-muted); flex: 1;
+}
+.column-count {
+  font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--text-muted); background: var(--surface-2);
+  border-radius: 999px; padding: 0.1rem 0.55rem;
+}
+
+/* CARD LIST */
+.card-list {
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;   /* cards stack vertically inside column */
+  gap: 0.65rem;
+  min-height: 80px;
+}
+
+/* ─────────────────────────────────────────────
+   4.3 CARD HOVER EFFECT
+   transition animates changes smoothly.
+   Without it the card would snap instantly.
+   :hover defines the state to animate TO.
+───────────────────────────────────────────── */
+.card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease; /* smooth animation */
+}
+.card:hover {
+  transform: translateY(-2px);              /* lifts card 2px upward */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);  /* deeper shadow on hover */
+}
+.card-done { opacity: 0.55; }
+.card-done .card-title { text-decoration: line-through; }
+.card-title  { font-size: 0.9rem; font-weight: 500; line-height: 1.45; }
+.card-footer { display: flex; align-items: center; gap: 0.4rem; }
+
+/* ─────────────────────────────────────────────
+   TAGS
+   font-mono gives tags a code-label feel
+───────────────────────────────────────────── */
+.card-tag {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  font-weight: 500; padding: 0.2rem 0.55rem;
+  border-radius: 6px; letter-spacing: 0.04em;
+}
+.tag-blue   { background: var(--tag-blue);   color: #5b8cff; }
+.tag-green  { background: var(--tag-green);  color: #26de81; }
+.tag-yellow { background: var(--tag-yellow); color: #ff9f43; }
+.tag-purple { background: var(--tag-purple); color: #a29bfe; } /* Exercise 01 */
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+   On small screens, columns stack vertically
+   instead of sitting side by side
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .board  { flex-direction: column; padding: 1rem; }
+  .column { min-width: unset; max-width: unset; width: 100%; }
+}
